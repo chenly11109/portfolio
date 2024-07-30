@@ -8,13 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      keyframes: {
+        bounce: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '85%': { transform: 'translate(0, 0)' },
+          '95%': { transform: 'translate(10px, -20px)' }
+        }
       },
-    },
+      animation: {
+        'bounce': 'bounce 5s infinite'
+      },
+    }
   },
+  variants: {},
   plugins: [],
 };
 export default config;
