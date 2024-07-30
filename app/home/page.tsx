@@ -45,7 +45,7 @@ export default function home() {
           </div>
           <div className="text-[28px] font-medium text-sky-800">
             <div className="mb-4">
-              I'm <span className="text-sky-500">Lingya Chen.</span>,
+              I&apos;m <span className="text-sky-500">Lingya Chen.</span>,
             </div>{" "}
             A front-end developer with extensive experience in&nbsp;
             <span
