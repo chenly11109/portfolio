@@ -16,9 +16,6 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -37,6 +34,12 @@ jobs:
 
       - name: Build Next.js Site
         run: pnpm build
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: .next # Ensure this path points to the directory containing the build output
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
