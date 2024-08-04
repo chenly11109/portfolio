@@ -2,38 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.bounce-landing {
+  animation: bounce-landing 3s infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@keyframes bounce-landing {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  85% {
+    transform: translate(0, 0);
+  }
+  95% {
+    transform: translate(10px, -20px);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  body {
+    @apply bg-sky-50 overflow-x-hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Track color */
+    border-radius: 10px; /* Rounded corners */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px; /* Rounded corners */
+    border: 3px solid #f0f0f0; /* Space around thumb */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-sky-800/50;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-sky-800/30;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 @layer components {
-  .transition-common{
-    @apply duration-300 transition-all
+  .transition-common {
+    @apply duration-300 transition-all;
+  }
+  .absolute-center {
+    @apply absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2;
+  }
+
+  .category-button {
+    @apply text-[20px] text-sky-800 font-semibold px-2 py-[2px] rounded-lg shadow-none
+  hover:bg-sky-800 hover:text-sky-100 cursor-pointer
+  hover:shadow-sky-800/50
+  active:bg-sky-700 active:shadow-lg
+  focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50
+  transition-common;
+  }
+  .category-button.selected {
+    @apply bg-sky-700 text-white opacity-70
+    shadow-lg shadow-sky-700/50
+    hover:bg-sky-800 hover:text-sky-100 hover:opacity-100
+    active:bg-sky-700 active:shadow-lg;
   }
 }
