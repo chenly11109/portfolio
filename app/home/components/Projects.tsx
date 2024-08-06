@@ -2,87 +2,38 @@ import Image from "next/image";
 import IconDoubleRight from "./IconDoubleRight";
 import { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
 import { twMerge } from "tailwind-merge";
-
-interface IProjectDescriptionProps {
-  title: string;
-  description: string;
-  contributions: {
-    title: string;
-    content: string;
-  }[];
-  skills: string[];
-  shortDesc: string[];
-  images: { title?: string; src: string }[];
-  link: string;
-}
-
-const projectInfo: IProjectDescriptionProps[] = [
-  {
-    title: "MuseAI Toolbox",
-    description:
-      "MuseAI Toolbox is an advanced web application for creating and editing digital content using AI technologies. It provides intuitive tools for image manipulation and text generation.",
-    contributions: [
-      {
-        title: "Image AI Tools",
-        content:
-          "Developed a React-based interface with the Canvas API for image editing including inpainting, outpainting, eraser and image composing, powered by Stable Diffusion. Added features include editing history tracking, image processing, and image exports.",
-      },
-      {
-        title: "Text AI Generation",
-        content:
-          "Developed text generation with LLMs like GPT and Claude, using prompt templates to generate relevant outputs.",
-      },
-      {
-        title: "Enterprise Version",
-        content:
-          "Led the development of an enterprise version, enhancing points system based on existing user role management system, LoRA training, and customized AI workflows.",
-      },
-    ],
-    skills: [
-      "React (Next.js)",
-      "MySQL (Prisma)",
-      "Canvas API",
-      "AI Image Generation (Stable Diffusion & ComfyUI)",
-      "GPT Models",
-    ],
-    images: [
-      {
-        src: "https://personal-use-images.oss-cn-shanghai.aliyuncs.com/MuseAI.jpg?OSSAccessKeyId=LTAI5tQqKs2njySmj22nM9DD&Expires=5322742536&Signature=Ew2foDRfmkhuAQV5%2BztVW0D4RSk%3D",
-        title: "MuseAI Tools",
-      },
-      {
-        src: "https://personal-use-images.oss-cn-shanghai.aliyuncs.com/MuseAI_1.jpg?OSSAccessKeyId=LTAI5tQqKs2njySmj22nM9DD&Expires=3600001722761192&Signature=SURWSLWQU141Yg%2BwwGOFKTKghGA%3D",
-        title: "Product Image Composer",
-      },
-      {
-        src: "https://personal-use-images.oss-cn-shanghai.aliyuncs.com/MuseAI_2.jpg?OSSAccessKeyId=LTAI5tQqKs2njySmj22nM9DD&Expires=3601722761217&Signature=Th50RnC%2FaDTtiTdcZocfeKjO%2Bak%3D",
-        title: "Image Editing",
-      },
-    ],
-    link: "https://app.museai.cc/",
-    shortDesc: ["NextJS", "AI Generation"],
-  },
-];
+import { projectInfo, IProjectDescriptionProps } from "./projectInfo";
 
 const ImageSlide = ({
   images,
 }: {
   images: { src: string; title?: string }[];
 }) => {
-  const pauseRef = useRef(false);
+  const [pause, setPause] = useState(false);
   const [imageIdx, setIndex] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (!pauseRef.current) {
-        setIndex((prev) => (prev + 1) % images.length);
-      }
-    }, 3000);
+    if (pause && timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+      return;
+    }
 
+    if (!pause && !timerRef.current) {
+      timerRef.current = setInterval(() => {
+        setIndex((prev) => {
+          return (prev + 1) % images.length;
+        });
+      }, 3000);
+      return;
+    }
+
+    console.log(pause, imageIdx, timerRef.current);
     return () => {
-      clearInterval(timer);
+      if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, []);
+  }, [pause]);
 
   return (
     <div
@@ -93,15 +44,17 @@ const ImageSlide = ({
       <div
         className="relative overflow-hidden no-scrollbar h-[600px] w-full"
         onMouseEnter={() => {
-          pauseRef.current = true;
+          console.log("triggered");
+          setPause(true);
         }}
         onMouseLeave={() => {
-          pauseRef.current = false;
+          console.log("untriggered");
+          setPause(false);
         }}
       >
         <div
           className={`flex h-full snap-center transition-all duration-500 absolute top-0 left-0
-          -translate-x-[${imageIdx * 100}%]`}
+            -translate-x-[${imageIdx * 100}%]`}
         >
           {images.map((item, index) => (
             <div
@@ -155,9 +108,9 @@ const ProjectItem: React.FC<
       onMouseEnter={() => {
         setSelectedIndex(currentIndex);
       }}
-      onMouseLeave={() => {
-        setSelectedIndex(-1);
-      }}
+      //   onMouseLeave={() => {
+      //     setSelectedIndex(-1);
+      //   }}
     >
       {expand && <ImageSlide images={images} />}
 
@@ -200,9 +153,7 @@ const ProjectItem: React.FC<
         )}
         {expand && (
           <div>
-            <h3 className="text-xl font-semibold text-sky-600">
-              Skills Demonstrated
-            </h3>
+            <h3 className="text-xl font-semibold text-sky-600">Skills</h3>
             <div className="text-gray-700 px-10">{skills.join(", ")}</div>
           </div>
         )}
