@@ -6,13 +6,18 @@ import { twMerge } from "tailwind-merge";
 interface IProjectDescriptionProps {
   title: string;
   description: string;
-  contributions: {
+  contributions?: {
+    title: string;
+    content: string;
+  }[];
+  contents?: {
     title: string;
     content: string;
   }[];
   skills: string[];
   shortDesc: string[];
-  images: { title?: string; src: string }[];
+  images?: { title?: string; src: string }[];
+  video?: string;
   link: string;
 }
 
@@ -35,14 +40,15 @@ const projectInfo: IProjectDescriptionProps[] = [
       {
         title: "Enterprise Version",
         content:
-          "Led the development of an enterprise version, enhancing points system based on existing user role management system, LoRA training, and customized AI workflows.",
+          "Led the development of an enterprise version, providing deployment on multiple cloud, enhancingzpoints system based on existing user role management system, LoRA training, and customized AI workflows.",
       },
     ],
     skills: [
-      "React (Next.js)",
-      "MySQL (Prisma)",
-      "Canvas API",
-      "AI Image Generation (Stable Diffusion & ComfyUI)",
+      "React (NextJS)",
+      "MySQL (Prisma ORM)",
+      "Cloud Services(Aliyun, Tencent Cloud, AWS, Azure)",
+      "Canvas API (Konva Canvas)",
+      "AI Image Generation (Stable Diffusion & ComfyUI/Fooocus)",
       "GPT Models",
     ],
     images: [
@@ -62,6 +68,96 @@ const projectInfo: IProjectDescriptionProps[] = [
     link: "https://app.museai.cc/",
     shortDesc: ["NextJS", "AI Generation"],
   },
+  {
+    "title": "Computer Graphics + WebGPU",
+    "description": "This project is a revamped version of a computer graphics course assignment initially based on C++, now utilizing WebGPU and JavaScript. Learn how to initialize and use WebGPU for basic rendering directly in the browser.",
+    "contributions": [
+      {
+        "title": "WebGPU Basics",
+        "content": "Introduction to WebGPU, setup and configuration in a browser environment, using ArrayBuffer for data storage, creating vertex and fragment shaders in WGSL, and establishing a basic rendering pipeline."
+      },
+      {
+        "title": "Computer Graphics Basics",
+        "content": "Fundamentals of computer graphics, exploring 2D and 3D transformation matrices including scaling, translating, and rotation operations, and how these transformations impact rendering objects in a scene."
+      },
+      {
+        "title": "Camera System",
+        "content": "Detailed exploration of camera systems in computer graphics, including the setup and use of orthographic and perspective cameras, and how to configure the view matrix based on eye location."
+      },
+      {
+        "title": "Lighting",
+        "content": "Overview of lighting techniques in computer graphics, covering object lighting such as diffuse and specular lighting, and context lighting which includes point lights and atmospheric lights."
+      }
+    ],
+    "skills": [
+      "WebGPU",
+      "WGSL",
+      "React + TypeScript",
+      "Computer Graphics (CSE 167)"
+    ],
+    "images": [
+      {
+        "src": "https://personal-use-images.oss-cn-shanghai.aliyuncs.com/MuseAI.jpg?OSSAccessKeyId=LTAI5tQqKs2njySmj22nM9DD&Expires=5322742536&Signature=Ew2foDRfmkhuAQV5%2BztVW0D4RSk%3D",
+        "title": "Lighting Demo"
+      },
+      {
+        "src": "https://personal-use-images.oss-cn-shanghai.aliyuncs.com/MuseAI_1.jpg?OSSAccessKeyId=LTAI5tQqKs2njySmj22nM9DD&Expires=3600001722761192&Signature=SURWSLWQU141Yg%2BwwGOFKTKghGA%3D",
+        "title": "Matrix Study Notes"
+      }
+    ],
+    "link": "https://chenly11109.github.io/computer-graphics-for-web-developer/",
+    "shortDesc": [
+      "WebGPU",
+      "Computer Graphics"
+    ]
+  },
+  {
+    "title": "Virtual Earth",
+    "description": "This project is a display project using three.js to  display data on a virtual earth",
+    "contents": [
+      {
+        "title": "hot spot mode",
+        "content": "using shader to "
+      },
+      {
+        "title": "Computer Graphics Basics",
+        "content": "Fundamentals of computer graphics, exploring 2D and 3D transformation matrices including scaling, translating, and rotation operations, and how these transformations impact rendering objects in a scene."
+      },
+      {
+        "title": "Camera System",
+        "content": "Detailed exploration of camera systems in computer graphics, including the setup and use of orthographic and perspective cameras, and how to configure the view matrix based on eye location."
+      },
+      {
+        "title": "Lighting",
+        "content": "Overview of lighting techniques in computer graphics, covering object lighting such as diffuse and specular lighting, and context lighting which includes point lights and atmospheric lights."
+      }
+    ],
+    "skills": [
+      "WebGPU (successor of WebGL)",
+      "WGSL (WebGPU Shading Language)",
+      "Computer Graphics (based on course CSE 167)",
+      "React + TypeScript",
+
+    ],
+    // "images": [
+    //   {
+    //     "src": "https://personal-use-images.oss-cn-shanghai.aliyuncs.com/MuseAI.jpg?OSSAccessKeyId=LTAI5tQqKs2njySmj22nM9DD&Expires=5322742536&Signature=Ew2foDRfmkhuAQV5%2BztVW0D4RSk%3D",
+    //     "title": "Lighting Demo"
+    //   },
+    //   {
+    //     "src": "https://personal-use-images.oss-cn-shanghai.aliyuncs.com/MuseAI_1.jpg?OSSAccessKeyId=LTAI5tQqKs2njySmj22nM9DD&Expires=3600001722761192&Signature=SURWSLWQU141Yg%2BwwGOFKTKghGA%3D",
+    //     "title": "Matrix Study Notes"
+    //   }
+    // ],
+
+    "video": 'https://personal-use-images.oss-cn-shanghai.aliyuncs.com/MuseAI.jpg?OSSAccessKeyId=LTAI5tQqKs2njySmj22nM9DD&Expires=5322742536&Signature=Ew2foDRfmkhuAQV5%2BztVW0D4RSk%3D',
+    "link": "https://chenly11109.github.io/computer-graphics-for-web-developer/",
+    "shortDesc": [
+      "WebGPU",
+      "Computer Graphics"
+    ]
+  },
+
 ];
 
 const ImageSlide = ({
@@ -126,6 +222,18 @@ const ImageSlide = ({
   );
 };
 
+
+const VideoComponent = ({ videoLink }: { videoLink: string }) => {
+
+  return <video controls
+    className="w-full md:w-1/2 shrink-0 shadow-md rounded border border-1"
+  >
+
+    <source src={videoLink} type="video/mp4" />
+
+
+  </video>
+}
 const ProjectItem: React.FC<
   IProjectDescriptionProps & {
     selectedInex: number;
@@ -134,9 +242,11 @@ const ProjectItem: React.FC<
   }
 > = ({
   images,
+  video,
   title,
   description,
   contributions,
+  contents,
   skills,
   link,
   shortDesc,
@@ -144,80 +254,106 @@ const ProjectItem: React.FC<
   selectedInex,
   setSelectedIndex,
 }) => {
-  const expand = currentIndex === selectedInex;
+    const expand = currentIndex === selectedInex;
 
-  return (
-    <div
-      className={twMerge(
-        "bg-white p-6 rounded-lg relative shadow-lg flex flex-col md:flex-row gap-10 h-[200px] transition-common overflow-hidden",
-        expand && "h-[800px]"
-      )}
-      onMouseEnter={() => {
-        setSelectedIndex(currentIndex);
-      }}
-      onMouseLeave={() => {
-        setSelectedIndex(-1);
-      }}
-    >
-      {expand && <ImageSlide images={images} />}
-
+    return (
       <div
-        className={twMerge("text-lg flex justify-center", expand && "flex-col")}
+        className={twMerge(
+          "bg-white p-6 rounded-lg relative shadow-lg flex flex-col md:flex-row gap-10 h-min-[200px] transition-common overflow-hidden",
+          expand && "h-min-[800px]"
+        )}
+        onMouseEnter={() => {
+          setSelectedIndex(currentIndex);
+        }}
+        onMouseLeave={() => {
+          setSelectedIndex(-1);
+        }}
       >
-        <a
-          href={link}
-          target="_blank"
-          className={twMerge(
-            "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-3xl font-bold mb-2",
-            expand && "animate-bounce"
-          )}
-        >
-          <IconDoubleRight />
+        {expand && images?.length && <ImageSlide images={images} />}
+        {expand && video && <VideoComponent videoLink={video} />
+        }
 
-          <div className=" w-[300px] text-nowrap"> {title}</div>
-        </a>
+
         <div
-          className={twMerge("text-gray-700 mb-4 px-10", !expand && "m-auto")}
+          className={twMerge("text-lg flex justify-center", expand && "flex-col")}
         >
-          {description}
-        </div>
-        {expand && (
-          <div className="mb-4">
-            <h3 className="text-xl font-semibold text-sky-600">
-              Contributions:
-            </h3>
-            <ul className="list-disc list-inside px-10">
-              {contributions.map((item) => (
-                <li key={item.title}>
-                  <strong className="text-sky-600 font-semibold pr-2">
-                    {item.title} :
-                  </strong>
-                  <span>{item.content}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {expand && (
-          <div>
-            <h3 className="text-xl font-semibold text-sky-600">
-              Skills Demonstrated
-            </h3>
-            <div className="text-gray-700 px-10">{skills.join(", ")}</div>
-          </div>
-        )}
+          <a
+            href={link}
+            target="_blank"
+            className={twMerge(
+              "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-3xl font-bold mb-2",
+              expand && "animate-bounce"
+            )}
+          >
+            <IconDoubleRight />
 
-        {!expand && (
-          <div className="whitespace-nowrap m-auto text-center font-semibold text-[20px] leading-8 text-sky-700 w-[200px]">
-            {shortDesc.map((item) => (
-              <div key={item}>{item}</div>
-            ))}
+            <div className=" w-[300px]"> {title}</div>
+          </a>
+          <div
+            className={twMerge("text-gray-700 mb-4 px-10", !expand && "m-auto")}
+          >
+            {description}
           </div>
-        )}
+          {expand && contributions?.length && (
+            <div className="mb-4">
+              <h3 className="text-xl font-semibold text-sky-600">
+                Contributions:
+              </h3>
+              <ul className="list-disc list-inside px-10">
+                {contributions.map((item) => (
+                  <li key={item.title}>
+                    <strong className="text-sky-600 font-semibold pr-2">
+                      {item.title} :
+                    </strong>
+                    <span>{item.content}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {expand && contents?.length && (
+            <div className="mb-4">
+              <h3 className="text-xl font-semibold text-sky-600">
+                Contents:
+              </h3>
+              <ul className="list-disc list-inside px-10">
+                {contents.map((item) => (
+                  <li key={item.title}>
+                    <strong className="text-sky-600 font-semibold pr-2">
+                      {item.title} :
+                    </strong>
+                    <span>{item.content}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {expand && (
+            <div>
+              <h3 className="text-xl font-semibold text-sky-600">
+                Skills Demonstrated
+              </h3>
+              {
+                skills.map((skill, index) => <div key={index}>
+                  {skill}
+                </div>)
+              }
+            </div>
+          )}
+
+          {!expand && (
+            <div className="whitespace-nowrap m-auto text-center font-semibold text-[20px] leading-8 text-sky-700 w-[200px]">
+              {shortDesc.map((item) => (
+                <div key={item}>{item}</div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default function Projects() {
   const [selectedIndex, setSelectedIndex] = useState(-1);
