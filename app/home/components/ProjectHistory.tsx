@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, useState, useRef } from "react";
+import { Dispatch, SetStateAction, useState, useRef, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 import Projects from "./Projects";
 import Design from "./Design";
@@ -50,7 +50,7 @@ export default function ProjectHistory() {
   const [category, setCategory] = useState(ICategory.PROJECT);
   return (
     <div>
-      <div className="w-full justify-center mt-20 flex gap-4">
+      <div className="w-full justify-center flex gap-4">
         <CategoryButton
           name="PROJECTS"
           category={category}
