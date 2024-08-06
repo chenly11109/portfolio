@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
 import { twMerge } from "tailwind-merge";
 import { projectInfo, IProjectDescriptionProps } from "./projectInfo";
 
+
 const ImageSlide = ({
   images,
 }: {
@@ -79,6 +80,18 @@ const ImageSlide = ({
   );
 };
 
+
+const VideoComponent = ({ videoLink }: { videoLink: string }) => {
+
+  return <video controls
+    className="w-full md:w-1/2 shrink-0 shadow-md rounded border border-1"
+  >
+
+    <source src={videoLink} type="video/mp4" />
+
+
+  </video>
+}
 const ProjectItem: React.FC<
   IProjectDescriptionProps & {
     selectedInex: number;
@@ -87,9 +100,11 @@ const ProjectItem: React.FC<
   }
 > = ({
   images,
+  video,
   title,
   description,
   contributions,
+  contents,
   skills,
   link,
   shortDesc,
@@ -99,8 +114,7 @@ const ProjectItem: React.FC<
 }) => {
   const expand = currentIndex === selectedInex;
 
-  return (
-    <div
+  return (<div
       className={twMerge(
         "bg-white p-6 rounded-lg relative shadow-lg flex flex-col md:flex-row gap-10 h-[200px] transition-common overflow-hidden",
         expand && "h-[800px]"
@@ -112,25 +126,13 @@ const ProjectItem: React.FC<
       //     setSelectedIndex(-1);
       //   }}
     >
-      {expand && <ImageSlide images={images} />}
+      {expand && images?.length && <ImageSlide images={images} />}
 
-      <div
-        className={twMerge("text-lg flex justify-center", expand && "flex-col")}
-      >
-        <a
-          href={link}
-          target="_blank"
-          className={twMerge(
-            "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-3xl font-bold mb-2",
-            expand && "animate-bounce"
-          )}
-        >
-          <IconDoubleRight />
+        {expand && video && <VideoComponent videoLink={video} />}
 
-          <div className=" w-[300px] text-nowrap"> {title}</div>
-        </a>
+
         <div
-          className={twMerge("text-gray-700 mb-4 px-10", !expand && "m-auto")}
+          className={twMerge("text-lg flex justify-center", expand && "flex-col")}
         >
           {description}
         </div>
@@ -140,7 +142,7 @@ const ProjectItem: React.FC<
               Contributions:
             </h3>
             <ul className="list-disc list-inside px-10">
-              {contributions.map((item) => (
+              {contributions?.map((item) => (
                 <li key={item.title}>
                   <strong className="text-sky-600 font-semibold pr-2">
                     {item.title} :
@@ -158,17 +160,83 @@ const ProjectItem: React.FC<
           </div>
         )}
 
-        {!expand && (
-          <div className="whitespace-nowrap m-auto text-center font-semibold text-[20px] leading-8 text-sky-700 w-[200px]">
-            {shortDesc.map((item) => (
-              <div key={item}>{item}</div>
-            ))}
+<a
+          href={link}
+          target="_blank"
+          className={twMerge(
+            "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-3xl font-bold mb-2",
+            expand && "animate-bounce"
+          )}
+        >
+          <IconDoubleRight />
+
+          <div className=" w-[300px] text-nowrap"> {title}</div>
+        </a>
+          <div
+            className={twMerge("text-gray-700 mb-4 px-10", !expand && "m-auto")}
+          >
+            {description}
           </div>
-        )}
-      </div>
-    </div>
-  );
-};
+          {expand && contributions?.length && (
+            <div className="mb-4">
+              <h3 className="text-xl font-semibold text-sky-600">
+                Contributions:
+              </h3>
+              <ul className="list-disc list-inside px-10">
+                {contributions.map((item) => (
+                  <li key={item.title}>
+                    <strong className="text-sky-600 font-semibold pr-2">
+                      {item.title} :
+                    </strong>
+                    <span>{item.content}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {expand && contents?.length && (
+            <div className="mb-4">
+              <h3 className="text-xl font-semibold text-sky-600">
+                Contents:
+              </h3>
+              <ul className="list-disc list-inside px-10">
+                {contents.map((item) => (
+                  <li key={item.title}>
+                    <strong className="text-sky-600 font-semibold pr-2">
+                      {item.title} :
+                    </strong>
+                    <span>{item.content}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {expand && (
+            <div>
+              <h3 className="text-xl font-semibold text-sky-600">
+                Skills Demonstrated
+              </h3>
+              {
+                skills.map((skill, index) => <div key={index}>
+                  {skill}
+                </div>)
+              }
+            </div>
+          )}
+
+          {!expand && (
+            <div className="whitespace-nowrap m-auto text-center font-semibold text-[20px] leading-8 text-sky-700 w-[200px]">
+              {shortDesc.map((item) => (
+                <div key={item}>{item}</div>
+              ))}
+            </div>
+          )}
+        </div>
+  
+    );
+  };
 
 export default function Projects() {
   const [selectedIndex, setSelectedIndex] = useState(-1);

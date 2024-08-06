@@ -24,6 +24,10 @@
     @apply bg-sky-50 overflow-x-hidden;
   }
 
+  ::selection {
+   @apply bg-sky-600/80 text-white
+}
+
   ::-webkit-scrollbar {
     width: 12px; /* Width of the scrollbar */
   }
