@@ -27,7 +27,12 @@ function CategoryButton({
   const handleClick = () => {
     // Scroll the element into view
     if (targetRef.current) {
-      targetRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => {
+        targetRef.current!.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300);
     }
     setCategory(currentCategory);
   };

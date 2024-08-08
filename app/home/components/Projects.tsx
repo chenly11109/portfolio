@@ -79,10 +79,10 @@ const ImageSlide = ({
 
 const VideoComponent = ({ videoLink }: { videoLink: string }) => {
   return (
-    <div className="w-full h-full flex flex-col justify-center">
+    <div className="w-full md:w-1/2 shrink-0 h-full flex flex-col justify-center">
       <video
         controls
-        className="w-full shrink-0 shadow-md rounded border border-1 aspect-video object-cover"
+        className="w-full shadow-md rounded border border-1 aspect-video object-cover"
       >
         <source src={videoLink} type="video/mp4" />
       </video>
@@ -108,6 +108,7 @@ const ProjectItem: React.FC<
   currentIndex,
   selectedInex,
   setSelectedIndex,
+  achieved,
 }) => {
   const expand = currentIndex === selectedInex;
 
@@ -115,7 +116,8 @@ const ProjectItem: React.FC<
     <div
       className={twMerge(
         "bg-white p-6 rounded-lg relative shadow-lg flex flex-col md:flex-row gap-10 h-[200px] transition-common overflow-hidden",
-        expand && "h-[800px]"
+        expand && "h-[800px]",
+        achieved && !expand && "opacity-50"
       )}
       onMouseEnter={() => {
         setSelectedIndex(currentIndex);
@@ -139,10 +141,15 @@ const ProjectItem: React.FC<
           target="_blank"
           className={twMerge(
             "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-3xl font-bold mb-2",
-            expand && "animate-bounce"
+            expand && "animate-bounce",
+            achieved && !expand && "text-neutral-500"
           )}
         >
-          <IconDoubleRight />
+          {!achieved || expand ? (
+            <IconDoubleRight />
+          ) : (
+            <div className="w-[30px]"></div>
+          )}
 
           <div className={twMerge(!expand && "w-[300px]")}> {title}</div>
         </a>
@@ -199,7 +206,12 @@ const ProjectItem: React.FC<
         )}
 
         {!expand && (
-          <div className="whitespace-nowrap m-auto text-center font-semibold text-[20px] leading-8 text-sky-700 w-[200px]">
+          <div
+            className={twMerge(
+              "whitespace-nowrap m-auto text-center font-semibold text-[20px] leading-8 text-sky-700 w-[200px]",
+              achieved && !expand && "text-neutral-700"
+            )}
+          >
             {shortDesc.map((item) => (
               <div key={item}>{item}</div>
             ))}

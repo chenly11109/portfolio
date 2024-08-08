@@ -92,7 +92,6 @@ export default function Landing() {
               .
             </div>
             Explore my website to discover my work and expertise.
-            {/* <FiGithub className="w-4 h-4 pointer" /> */}
           </div>
         </div>
       </div>
