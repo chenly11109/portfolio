@@ -7,10 +7,10 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <main className="text-base">
       <section>
         {/* Include shared UI here e.g. a header or sidebar */}
-        <nav className="px-10 flex items-center w-full h-[50px] text-[14px] justify-between">
+        <nav className="px-10 flex items-center w-full h-[50px] text justify-between">
           <Link href="/home">Home | Lingya`s portfolio</Link>
 
           <div className="flex gap-5">
@@ -22,9 +22,8 @@ export default function HomeLayout({
             </Link>
 
             <Link
-              href={"./Resume.pdf"}
+              href={"/resume"}
               target="_blank"
-              download="Resume_Lingya.pdf"
               className="leading-8 cursor-pointer text-cyan-800/50 font-semibold hover:text-cyan-800 transition-common"
             >
               Resume

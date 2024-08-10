@@ -66,7 +66,10 @@ export const projectInfo: IProjectDescriptionProps[] = [
 
   {
     "title": "Computer Graphics + WebGPU",
-    "description": "This project is a revamped version of a computer graphics course assignment initially based on C++, now utilizing WebGPU and JavaScript. Learn how to initialize and use WebGPU for basic rendering directly in the browser.",
+    "description": `This project is a study-focused initiative designed for frontend
+              developers without a C++ background who are interested in learning
+              computer graphics. It transitions a traditional C++ computer
+              graphics assignment to a WebGPU and JavaScript-based approach.`,
     "contents": [
       {
         "title": "WebGPU Basics",

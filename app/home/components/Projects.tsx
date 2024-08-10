@@ -66,9 +66,7 @@ const ImageSlide = ({
                 height={800}
                 src={item.src}
               />
-              <div className="font-semibold text-sky-900 text-[20px]">
-                {item.title}
-              </div>
+              <div className="font-semibold text-sky-900">{item.title}</div>
             </div>
           ))}
         </div>
@@ -140,7 +138,7 @@ const ProjectItem: React.FC<
           href={link}
           target="_blank"
           className={twMerge(
-            "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-3xl font-bold mb-2",
+            "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-2xl font-bold mb-2",
             expand && "animate-bounce",
             achieved && !expand && "text-neutral-500"
           )}
@@ -208,7 +206,7 @@ const ProjectItem: React.FC<
         {!expand && (
           <div
             className={twMerge(
-              "whitespace-nowrap m-auto text-center font-semibold text-[20px] leading-8 text-sky-700 w-[200px]",
+              "whitespace-nowrap m-auto text-center font-semibold text-[24px] leading-8 text-sky-700 w-[200px]",
               achieved && !expand && "text-neutral-700"
             )}
           >

@@ -2,6 +2,7 @@ import Arch_1 from "@/public/ani_0_Architecture@2x.png";
 import Arch_2 from "@/public/ani_1_Architecture@2x.png";
 import Arch_3 from "@/public/ani_2_Architecture@2x.png";
 import Image from "next/image";
+import ResumeDownload from "@/app/resume/components/ResumeDownlod";
 
 function Architecture() {
   return (
@@ -44,10 +45,10 @@ export default function Landing() {
       <Architecture />
       <div className="h-full items-center text-pretty justify-center flex">
         <div className="max-w-[700px] mt-10">
-          <div className="text-[40px] mb-5 font-bold text-primary-500 text-sky-500">
+          <div className="text-3xl mb-5 font-bold text-primary-500 text-sky-500">
             Welcome to My Portfolio!
           </div>
-          <div className="text-[28px] font-medium text-sky-800">
+          <div className="text-xl font-medium text-sky-800">
             <div className="mb-4">
               I&apos;m <span className="text-sky-500">Lingya Chen</span>,
             </div>{" "}
@@ -93,6 +94,8 @@ export default function Landing() {
             </div>
             Explore my website to discover my work and expertise.
           </div>
+
+          <ResumeDownload />
         </div>
       </div>
     </div>

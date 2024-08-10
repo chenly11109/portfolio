@@ -62,14 +62,14 @@ export default function ProjectHistory() {
           currentCategory={ICategory.PROJECT}
           setCategory={setCategory}
         />
-        <div className="text-[20px] pt-20 font-medium">·</div>
+        <div className="text-xl pt-20 font-medium">·</div>
         <CategoryButton
           name="DESIGN"
           category={category}
           currentCategory={ICategory.DESIGN}
           setCategory={setCategory}
         />
-        <div className="text-[20px] pt-20 font-medium">·</div>
+        <div className="text-xl pt-20 font-medium">·</div>
         <CategoryButton
           name="EXPERIENCE"
           category={category}
