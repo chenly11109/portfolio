@@ -73,7 +73,7 @@ export default function Home() {
         <CategoryButton
           name="EXPERIENCE"
           category={category}
-          currentCategory={ICategory.EXPERIENCE}
+          currentCategory={ICategory.PROJECT}
           setCategory={setCategory}
         />
       </div>
