@@ -1,9 +1,9 @@
 "use client";
 import { Dispatch, SetStateAction, useState, useRef, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
-import Projects from "./Projects";
+import Projects from "./projects/Projects";
 import Design from "./Design";
-import Experience from "./Experience";
+import Experience from "./experience/Experience";
 
 enum ICategory {
   PROJECT,
@@ -51,8 +51,8 @@ function CategoryButton({
   );
 }
 
-export default function ProjectHistory() {
-  const [category, setCategory] = useState(ICategory.PROJECT);
+export default function Home() {
+  const [category, setCategory] = useState(ICategory.EXPERIENCE);
   return (
     <div>
       <div className="w-full justify-center flex gap-4">

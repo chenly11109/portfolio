@@ -82,12 +82,11 @@ export default function Landing() {
             </span>
             .
             <div className="my-4">
-              I also have over 5 years of experience in
+              I also have over 5 years of experience in &nbsp;
               <span
                 className="inline-block text-sky-500 cursor-pointer
               hover:underline hover:text-sky-700 transition-common"
               >
-                {" "}
                 architectural design
               </span>
               .

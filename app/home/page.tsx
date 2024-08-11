@@ -1,11 +1,11 @@
 import Landing from "./components/Landing";
-import ProjectHistory from "./components/ProjectHistory";
+import Home from "./components/Home";
 
 export default function home() {
   return (
     <div>
       <Landing />
-      <ProjectHistory />
+      <Home />
     </div>
   );
 }

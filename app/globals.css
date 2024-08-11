@@ -5,7 +5,6 @@
 .bounce-landing {
   animation: bounce-landing 3s infinite;
 }
-
 @keyframes bounce-landing {
   0%,
   100% {
@@ -19,14 +18,49 @@
   }
 }
 
+.bounce-cat {
+  animation: bounce-cat ease-in-out 3s infinite;
+}
+
+.bounce-cat2 {
+  animation: bounce-cat2 ease-in-out 3s infinite;
+}
+@keyframes bounce-cat {
+  85% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.6;
+  }
+ 
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce-cat2 {
+  85% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(5deg);
+  }
+  95% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 @layer base {
   body {
     @apply bg-sky-50 overflow-x-hidden;
   }
 
   ::selection {
-   @apply bg-sky-600/80 text-white
-}
+    @apply bg-sky-600/80 text-white;
+  }
 
   ::-webkit-scrollbar {
     width: 12px; /* Width of the scrollbar */

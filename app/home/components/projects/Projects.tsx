@@ -3,6 +3,7 @@ import IconDoubleRight from "./IconDoubleRight";
 import { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
 import { twMerge } from "tailwind-merge";
 import { projectInfo, IProjectDescriptionProps } from "./projectInfo";
+import { useMeasure } from "@uidotdev/usehooks";
 
 const ImageSlide = ({
   images,
@@ -33,6 +34,7 @@ const ImageSlide = ({
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [pause]);
+
   return (
     <div
       className={
@@ -77,7 +79,7 @@ const ImageSlide = ({
 
 const VideoComponent = ({ videoLink }: { videoLink: string }) => {
   return (
-    <div className="w-full md:w-1/2 shrink-0 h-full flex flex-col justify-center">
+    <div className="w-full md:w-1/2 shrink-0 h-full flex flex-col justify-center my-auto">
       <video
         controls
         className="w-full shadow-md rounded border border-1 aspect-video object-cover"
@@ -87,6 +89,7 @@ const VideoComponent = ({ videoLink }: { videoLink: string }) => {
     </div>
   );
 };
+
 const ProjectItem: React.FC<
   IProjectDescriptionProps & {
     selectedInex: number;
@@ -109,12 +112,13 @@ const ProjectItem: React.FC<
   achieved,
 }) => {
   const expand = currentIndex === selectedInex;
-
+  const [containerRef, { height }] = useMeasure();
   return (
     <div
       className={twMerge(
         "bg-white p-6 rounded-lg relative shadow-lg flex flex-col md:flex-row gap-10 h-[200px] transition-common overflow-hidden",
-        expand && "h-[800px]",
+        expand && "min-h-[800px]",
+        expand && height && `h-[${height}px]`,
         achieved && !expand && "opacity-50"
       )}
       onMouseEnter={() => {
@@ -133,6 +137,7 @@ const ProjectItem: React.FC<
           !expand && "flex",
           expand && "flex flex-col justify-center gap-1"
         )}
+        ref={containerRef}
       >
         <a
           href={link}

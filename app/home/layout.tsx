@@ -42,7 +42,7 @@ export default function HomeLayout({
         {children}
       </section>
 
-      <footer className="w-full h-full h-[60px] text-white bg-sky-900 text-center leading-[60px]">
+      <footer className="text-sm font-sans w-full h-full h-[60px] text-white bg-sky-900 text-center leading-[60px]">
         Copyright © Lingya Chen (chenlingya109@gmail.com). All Rights Reserved.
       </footer>
     </main>

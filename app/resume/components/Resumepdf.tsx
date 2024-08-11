@@ -472,7 +472,7 @@ const ResumePDF = () => (
           </View>
           <View style={styles.sectionRight}>
             <Text style={styles.sectionTitle}>
-              Yunlian Ltd,Co | Beijing, China
+              Yunlian (CloudChain) Technology | Beijing, China
             </Text>
             <Text
               style={{
@@ -489,10 +489,10 @@ const ResumePDF = () => (
                 paddingTop: "8px",
               }}
             >
-              A Web3 startup that has successfully secured angel round funding.
-              The company’s primary project is a no-code development platform
-              aimed at attracting developers who are interested in Web3 but lack
-              coding experience.
+              Yunlian is a Web3 startup that has successfully secured angel
+              round funding. The company’s primary project is a no-code
+              development platform aimed at attracting developers who are
+              interested in Web3 but lack coding experience.
             </Text>
 
             <Text style={{ marginTop: "8px" }} wrap={false}>
