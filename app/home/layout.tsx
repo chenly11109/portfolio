@@ -1,5 +1,6 @@
-import Link from "next/link";
-import IconGithub from "./components/IconGithub";
+import Landing from "./components/Landing";
+import Home from "./components/Home";
+import NavLink from "./components/NavLink";
 
 export default function HomeLayout({
   children, // will be a page or nested layout
@@ -10,36 +11,13 @@ export default function HomeLayout({
     <main className="text-base">
       <section>
         {/* Include shared UI here e.g. a header or sidebar */}
-        <nav className="px-10 flex items-center w-full h-[50px] text justify-between">
-          <Link href="/home">Home | Lingya`s portfolio</Link>
+        <NavLink href="/home/projects" />
 
-          <div className="flex gap-5">
-            <Link
-              href="mailto: chenlingya109@gmail.com"
-              className="leading-8 cursor-pointer text-cyan-800/50 font-semibold hover:text-cyan-800 transition-common"
-            >
-              Contact
-            </Link>
-
-            <Link
-              href={"/resume"}
-              target="_blank"
-              className="leading-8 cursor-pointer text-cyan-800/50 font-semibold hover:text-cyan-800 transition-common"
-            >
-              Resume
-            </Link>
-
-            <Link
-              href="https://github.com/chenly11109/portfolio"
-              target="_blank"
-              className="w-4"
-            >
-              <IconGithub />
-            </Link>
-          </div>
-        </nav>
-
-        {children}
+        <div>
+          <Landing />
+          <Home />
+          <div className="w-full overflow-hidden">{children}</div>
+        </div>
       </section>
 
       <footer className="text-sm font-sans w-full h-full h-[60px] text-white bg-sky-900 text-center leading-[60px]">

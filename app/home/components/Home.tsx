@@ -1,30 +1,29 @@
 "use client";
 import { Dispatch, SetStateAction, useState, useRef, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
-import Projects from "./projects/Projects";
-import Design from "./Design";
-import Experience from "./experience/Experience";
+import Projects from "../projects/page";
+import Design from "../design/page";
+import Experience from "../experience/page";
+import { usePathname, useRouter } from "next/navigation";
 
 enum ICategory {
-  PROJECT,
-  DESIGN,
-  EXPERIENCE,
+  PROJECT = "projects",
+  DESIGN = "design",
+  EXPERIENCE = "experience",
 }
 
 function CategoryButton({
   name,
-  currentCategory,
   category,
-  setCategory,
 }: {
   name: string;
-  currentCategory: ICategory;
   category: ICategory;
-  setCategory: Dispatch<SetStateAction<ICategory>>;
 }) {
   const targetRef = useRef<HTMLDivElement>(null);
-
+  const pathname = usePathname();
+  const router = useRouter();
   const handleClick = () => {
+    router.push(`/home/${category}`);
     // Scroll the element into view
     if (targetRef.current) {
       setTimeout(() => {
@@ -34,14 +33,13 @@ function CategoryButton({
         });
       }, 300);
     }
-    setCategory(currentCategory);
   };
   return (
     <div className="pt-20" ref={targetRef}>
       <div
         className={twMerge(
           "category-button",
-          category === currentCategory && "selected"
+          pathname.includes(category) && "selected"
         )}
         onClick={handleClick}
       >
@@ -52,36 +50,14 @@ function CategoryButton({
 }
 
 export default function Home() {
-  const [category, setCategory] = useState(ICategory.EXPERIENCE);
   return (
     <div>
       <div className="w-full justify-center flex gap-4">
-        <CategoryButton
-          name="PROJECTS"
-          category={category}
-          currentCategory={ICategory.PROJECT}
-          setCategory={setCategory}
-        />
+        <CategoryButton name="PROJECTS" category={ICategory.PROJECT} />
         <div className="text-xl pt-20 font-medium">·</div>
-        <CategoryButton
-          name="DESIGN"
-          category={category}
-          currentCategory={ICategory.DESIGN}
-          setCategory={setCategory}
-        />
+        <CategoryButton name="DESIGN" category={ICategory.DESIGN} />
         <div className="text-xl pt-20 font-medium">·</div>
-        <CategoryButton
-          name="EXPERIENCE"
-          category={category}
-          currentCategory={ICategory.PROJECT}
-          setCategory={setCategory}
-        />
-      </div>
-
-      <div className="w-full overflow-hidden">
-        {category === ICategory.PROJECT && <Projects />}
-        {category === ICategory.DESIGN && <Design />}
-        {category === ICategory.EXPERIENCE && <Experience />}
+        <CategoryButton name="EXPERIENCE" category={ICategory.EXPERIENCE} />
       </div>
     </div>
   );

@@ -1,8 +1,12 @@
+"use client";
 import Image from "next/image";
-import IconDoubleRight from "./IconDoubleRight";
+import IconDoubleRight from "./components/IconDoubleRight";
 import { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
 import { twMerge } from "tailwind-merge";
-import { projectInfo, IProjectDescriptionProps } from "./projectInfo";
+import {
+  projectInfo,
+  IProjectDescriptionProps,
+} from "./components/projectInfo";
 import { useMeasure } from "@uidotdev/usehooks";
 
 const ImageSlide = ({
