@@ -2,6 +2,12 @@ import { designPojects } from "../designData";
 import NavLink from "@/app/home/components/NavLink";
 import Image from "next/image";
 
+export async function generateStaticParams() {
+  return designPojects.map((project) => ({
+    id: project.keyIndex + '',
+  }))
+}
+
 export default function DesignProject({ params }: { params: { id: number } }) {
   const item = designPojects[params.id - 1];
   const {

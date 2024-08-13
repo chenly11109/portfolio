@@ -37,7 +37,7 @@ const ImageSlide = ({
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [pause]);
+  }, [images.length, pause]);
 
   return (
     <div
@@ -115,119 +115,119 @@ const ProjectItem: React.FC<
   setSelectedIndex,
   achieved,
 }) => {
-  const expand = currentIndex === selectedInex;
-  const [containerRef, { height }] = useMeasure();
-  return (
-    <div
-      className={twMerge(
-        "bg-white p-6 rounded-lg relative shadow-lg flex flex-col md:flex-row gap-10 h-[200px] transition-common overflow-hidden",
-        expand && "min-h-[800px]",
-        expand && height && `h-[${height}px]`,
-        achieved && !expand && "opacity-50"
-      )}
-      onMouseEnter={() => {
-        setSelectedIndex(currentIndex);
-      }}
-      onMouseLeave={() => {
-        setSelectedIndex(-1);
-      }}
-    >
-      {expand && images?.length && <ImageSlide images={images} />}
-
-      {expand && video && <VideoComponent videoLink={video} />}
-
+    const expand = currentIndex === selectedInex;
+    const [containerRef, { height }] = useMeasure();
+    return (
       <div
         className={twMerge(
-          !expand && "flex",
-          expand && "flex flex-col justify-center gap-1"
+          "bg-white p-6 rounded-lg relative shadow-lg flex flex-col md:flex-row gap-10 h-[200px] transition-common overflow-hidden",
+          expand && "min-h-[800px]",
+          expand && height && `h-[${height}px]`,
+          achieved && !expand && "opacity-50"
         )}
-        ref={containerRef}
+        onMouseEnter={() => {
+          setSelectedIndex(currentIndex);
+        }}
+        onMouseLeave={() => {
+          setSelectedIndex(-1);
+        }}
       >
-        <a
-          href={link}
-          target="_blank"
-          className={twMerge(
-            "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-2xl font-bold mb-2",
-            expand && "animate-bounce",
-            achieved && !expand && "text-neutral-500"
-          )}
-        >
-          {!achieved || expand ? (
-            <IconDoubleRight />
-          ) : (
-            <div className="w-[30px]"></div>
-          )}
+        {expand && images?.length && <ImageSlide images={images} />}
 
-          <div className={twMerge(!expand && "w-[300px]")}> {title}</div>
-        </a>
+        {expand && video && <VideoComponent videoLink={video} />}
+
         <div
-          className={twMerge("text-gray-700 mb-4 px-10", !expand && "m-auto")}
+          className={twMerge(
+            !expand && "flex",
+            expand && "flex flex-col justify-center gap-1"
+          )}
+          ref={containerRef}
         >
-          {description}
-        </div>
-        {expand && contributions?.length && (
-          <div className="mb-4">
-            <h3 className="text-xl font-semibold text-sky-600">
-              Contributions:
-            </h3>
-            <ul className="list-disc list-inside px-10">
-              {contributions.map((item) => (
-                <li key={item.title}>
-                  <strong className="text-sky-600 font-semibold pr-2">
-                    {item.title} :
-                  </strong>
-                  <span>{item.content}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {expand && contents?.length && (
-          <div className="mb-4">
-            <h3 className="text-xl font-semibold text-sky-600">Contents:</h3>
-            <ul className="list-disc list-inside px-10">
-              {contents.map((item) => (
-                <li key={item.title}>
-                  <strong className="text-sky-600 font-semibold pr-2">
-                    {item.title} :
-                  </strong>
-                  <span>{item.content}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {expand && (
-          <div>
-            <h3 className="text-xl font-semibold text-sky-600">
-              Skills Demonstrated
-            </h3>
-            <ul className="list-disc list-inside px-10">
-              {skills.map((skill, index) => (
-                <li key={index}>{skill}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {!expand && (
-          <div
+          <a
+            href={link}
+            target="_blank"
             className={twMerge(
-              "whitespace-nowrap m-auto text-center font-semibold text-[24px] leading-8 text-sky-700 w-[200px]",
-              achieved && !expand && "text-neutral-700"
+              "flex gap-2 items-center text-sky-500 cursor-pointer hover:text-sky-800 hover:underline transition-common text-2xl font-bold mb-2",
+              expand && "animate-bounce",
+              achieved && !expand && "text-neutral-500"
             )}
           >
-            {shortDesc.map((item) => (
-              <div key={item}>{item}</div>
-            ))}
+            {!achieved || expand ? (
+              <IconDoubleRight />
+            ) : (
+              <div className="w-[30px]"></div>
+            )}
+
+            <div className={twMerge(!expand && "w-[300px]")}> {title}</div>
+          </a>
+          <div
+            className={twMerge("text-gray-700 mb-4 px-10", !expand && "m-auto")}
+          >
+            {description}
           </div>
-        )}
+          {expand && contributions?.length && (
+            <div className="mb-4">
+              <h3 className="text-xl font-semibold text-sky-600">
+                Contributions:
+              </h3>
+              <ul className="list-disc list-inside px-10">
+                {contributions.map((item) => (
+                  <li key={item.title}>
+                    <strong className="text-sky-600 font-semibold pr-2">
+                      {item.title} :
+                    </strong>
+                    <span>{item.content}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {expand && contents?.length && (
+            <div className="mb-4">
+              <h3 className="text-xl font-semibold text-sky-600">Contents:</h3>
+              <ul className="list-disc list-inside px-10">
+                {contents.map((item) => (
+                  <li key={item.title}>
+                    <strong className="text-sky-600 font-semibold pr-2">
+                      {item.title} :
+                    </strong>
+                    <span>{item.content}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {expand && (
+            <div>
+              <h3 className="text-xl font-semibold text-sky-600">
+                Skills Demonstrated
+              </h3>
+              <ul className="list-disc list-inside px-10">
+                {skills.map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {!expand && (
+            <div
+              className={twMerge(
+                "whitespace-nowrap m-auto text-center font-semibold text-[24px] leading-8 text-sky-700 w-[200px]",
+                achieved && !expand && "text-neutral-700"
+              )}
+            >
+              {shortDesc.map((item) => (
+                <div key={item}>{item}</div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default function Projects() {
   const [selectedIndex, _setSelectedIndex] = useState(-1);
