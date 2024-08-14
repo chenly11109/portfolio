@@ -1,20 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    async redirects() {
-        return [
-          // Basic redirect
-          {
-            source: '/home',
-            destination: '/home/projects',
-            permanent: true,
-          },
-          {
-            source: '/',
-            destination: '/home/projects',
-            permanent: true,
-          }
-        ]
-      },
+    // async redirects() {
+    //     return [
+    //       // Basic redirect
+    //       {
+    //         source: '/home',
+    //         destination: '/home/projects',
+    //         permanent: true,
+    //       },
+    //       {
+    //         source: '/',
+    //         destination: '/home/projects',
+    //         permanent: true,
+    //       }
+    //     ]
+    //   },
 
     images: {
         remotePatterns: [
