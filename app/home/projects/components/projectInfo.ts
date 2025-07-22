@@ -97,7 +97,7 @@ export const projectInfo: IProjectDescriptionProps[] = [
       },
     ],
     link: "https://who-is-ai.vercel.app/",
-    shortDesc: ["Python", "AI Experiment", "Game Simulation"],
+    shortDesc: ["Python (Flask) + React", "AI Game"],
   },
   {
     title: "Computer Graphics + WebGPU",
