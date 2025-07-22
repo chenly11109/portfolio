@@ -1,9 +1,7 @@
 "use client";
-import { Dispatch, SetStateAction, useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
-import Projects from "../projects/page";
-import Design from "../design/page";
-import Experience from "../experience/page";
+
 import { usePathname, useRouter } from "next/navigation";
 
 enum ICategory {
